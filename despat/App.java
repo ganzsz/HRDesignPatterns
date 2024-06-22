@@ -4,9 +4,21 @@ import despat.car.Car;
 import despat.car.factory.CarFactory;
 import despat.car.factory.Exceptions.BrandNotFoundException;
 import despat.car.factory.Exceptions.ModelNotFoundException;
+import despat.car.option.Speaker;
 
 public class App {
+    private static CarFactory factoryInstance;
+
+    private static CarFactory getFactoryInstance() {
+        if (App.factoryInstance == null) {
+            App.factoryInstance = new CarFactory();
+        }
+
+        return App.factoryInstance;
+    }
+
     private static void testFactory() {
+        System.out.println("App.testFactory()");
         String[][] tests = {
                 { "Fiat", "Panda" },
                 { "Fiat", "Panda", "100 HP" },
@@ -15,19 +27,16 @@ public class App {
                 { "Invalid", "Panda" },
                 { "Both", "Invalid" },
         };
-        var carFactory = new CarFactory();
 
         for (String[] strings : tests) {
             try {
                 Car car;
                 if (strings.length > 2) {
-                    car = carFactory.getCar(strings[0], strings[1], strings[2], 1422055);
+                    car = App.getFactoryInstance().getCar(strings[0], strings[1], strings[2], 1422055);
                 } else {
-                    car = carFactory.getCar(strings[0], strings[1], 1422055);
+                    car = App.getFactoryInstance().getCar(strings[0], strings[1], 1422055);
                 }
-                System.out.print(car.getName());
-                System.out.print(" Engine: ");
-                System.out.println(car.getEngine());
+                System.out.println(car);
             } catch (ModelNotFoundException m) {
                 System.err.println(m);
             } catch (BrandNotFoundException b) {
@@ -36,8 +45,21 @@ public class App {
         }
     }
 
+    private static void testDecorator() {
+        System.out.println("App.testDecorator()");
+        try {
+            var luxeobject = App.getFactoryInstance().getCar("Fiat", "Panda", "100 HP", 442200);
+            var carWithSpeakers = new Speaker(luxeobject);
+            carWithSpeakers.setSpeakerCount(5);
+            System.out.println(carWithSpeakers);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("App.main()");
         testFactory();
+        testDecorator();
     }
 }

@@ -2,18 +2,8 @@ package despat.car;
 
 import despat.engine.Engine;
 
-public abstract class Car {
-    private final int vin;
-
-    Car(int vin) {
-        this.vin = vin;
-    }
-
-    public int getVin() {
-        return vin;
-    }
-
-    public abstract String getName();
+public interface Car {
+    public abstract int getVin();
 
     public abstract String getBrand();
 

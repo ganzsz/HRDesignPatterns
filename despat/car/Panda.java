@@ -13,16 +13,6 @@ public class Panda extends Fiat {
     }
 
     @Override
-    public String getName() {
-        return new StringBuilder()
-                .append("Car, brand: ")
-                .append(brand)
-                .append(", model: ")
-                .append(model)
-                .toString();
-    }
-
-    @Override
     public Engine getEngine() {
         return this.engine;
     }
