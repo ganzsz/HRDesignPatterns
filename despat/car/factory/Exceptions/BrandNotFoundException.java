@@ -1,4 +1,4 @@
-package despat.factories.Exceptions;
+package despat.car.factory.Exceptions;
 
 public class BrandNotFoundException extends Exception {
     public BrandNotFoundException(String brand) {

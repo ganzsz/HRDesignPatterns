@@ -2,8 +2,24 @@ package despat.car;
 
 import despat.engine.Engine;
 
-public interface Car {
-    abstract String GetName();
+public abstract class Car {
+    private final int vin;
 
-    abstract Engine GetEngine();
+    Car(int vin) {
+        this.vin = vin;
+    }
+
+    public int getVin() {
+        return vin;
+    }
+
+    public abstract String getName();
+
+    public abstract String getBrand();
+
+    public abstract String getModel();
+
+    public abstract Engine getEngine();
+
+    public abstract int getWheels();
 }
